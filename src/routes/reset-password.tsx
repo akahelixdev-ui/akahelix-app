@@ -63,7 +63,7 @@ function ResetPasswordPage() {
           : error.message,
       );
     toast.success("Password updated");
-    window.location.href = "https://app.akahelix.com/";
+    void navigate({ to: "/dashboard", replace: true });
   }
 
   return (

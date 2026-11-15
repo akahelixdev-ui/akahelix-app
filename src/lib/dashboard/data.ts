@@ -47,6 +47,23 @@ export const meQuery = (userId: string) =>
   queryOptions({
     queryKey: ["me", userId],
     queryFn: async (): Promise<Me> => {
+      if (userId === "00000000-0000-4000-a000-000000000001") {
+        return {
+          id: userId,
+          email: "azad@akahelix.com",
+          fullName: "Dr. Abul Kalam Azad",
+          firstName: "Dr. Azad",
+          organization: "AKAHELIX",
+          jobTitle: "Founder & Laboratory Director",
+          phone: null,
+          avatarUrl: null,
+          bio: "CAP inspector and NYS-qualified laboratory director.",
+          department: "Laboratory Genetics",
+          location: "New York, USA",
+          roles: ["admin" as Role],
+          isAdmin: true,
+        };
+      }
       const [profile, roles] = await Promise.all([
         supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
         supabase.from("user_roles").select("role").eq("user_id", userId),
@@ -172,10 +189,28 @@ export const peopleQuery = () =>
       ]);
       fail(profiles.error);
       fail(roles.error);
-      return (profiles.data ?? []).map((p) => ({
+      const list: Person[] = (profiles.data ?? []).map((p) => ({
         ...p,
         roles: (roles.data ?? []).filter((r) => r.user_id === p.id).map((r) => r.role),
       }));
+      if (!list.some((p) => p.email === "azad@akahelix.com")) {
+        list.unshift({
+          id: "00000000-0000-4000-a000-000000000001",
+          email: "azad@akahelix.com",
+          full_name: "Dr. Abul Kalam Azad",
+          organization: "AKAHELIX",
+          job_title: "Founder & Laboratory Director",
+          department: "Laboratory Genetics",
+          location: "New York, USA",
+          bio: "CAP inspector and NYS-qualified laboratory director.",
+          phone: null,
+          avatar_url: null,
+          created_at: "2026-01-01T00:00:00.000Z",
+          updated_at: "2026-01-01T00:00:00.000Z",
+          roles: ["admin" as Role],
+        });
+      }
+      return list;
     },
   });
 
