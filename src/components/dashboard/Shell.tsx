@@ -134,12 +134,27 @@ export function DashboardShell({ me, children }: { me: Me; children: ReactNode }
   const sidebar = (
     <>
       <div className="flex items-center justify-between px-1">
-        <Link to="/dashboard" aria-label="Dashboard home">
+        <a
+          href="https://akahelix.com"
+          className="transition-opacity hover:opacity-80"
+          aria-label="AKAHELIX"
+          title="Go to https://akahelix.com"
+        >
           <Wordmark />
-        </Link>
-        <span className="label-mono rounded-[3px] bg-mist px-1.5 py-0.5 text-[0.5625rem] text-muted-foreground">
-          {me.isAdmin ? "Team" : "Client"}
-        </span>
+        </a>
+        <div className="flex items-center gap-1.5">
+          <a
+            href="https://akahelix.com"
+            className="label-mono flex items-center gap-1 rounded-[3px] bg-mist px-1.5 py-0.5 text-[0.625rem] text-muted-foreground transition-colors hover:bg-mist-deep hover:text-foreground"
+            title="Go to https://akahelix.com"
+          >
+            <span>Website</span>
+            <span aria-hidden>↗</span>
+          </a>
+          <span className="label-mono rounded-[3px] bg-mist px-1.5 py-0.5 text-[0.5625rem] text-muted-foreground">
+            {me.isAdmin ? "Team" : "Client"}
+          </span>
+        </div>
       </div>
       <div className="ticks mt-5 text-foreground" aria-hidden />
       <div className="mt-6 flex-1">
@@ -158,17 +173,32 @@ export function DashboardShell({ me, children }: { me: Me; children: ReactNode }
       </aside>
 
       <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-border bg-card px-4 lg:hidden">
-        <Link to="/dashboard" aria-label="Dashboard home">
-          <Wordmark />
-        </Link>
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="flex size-9 items-center justify-center rounded-[4px] border border-border"
-          aria-label="Open menu"
+        <a
+          href="https://akahelix.com"
+          className="transition-opacity hover:opacity-80"
+          aria-label="AKAHELIX"
+          title="Go to https://akahelix.com"
         >
-          <List className="size-4" />
-        </button>
+          <Wordmark />
+        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href="https://akahelix.com"
+            className="label-mono flex items-center gap-1 text-[0.75rem] text-muted-foreground transition-colors hover:text-foreground"
+            title="Go to https://akahelix.com"
+          >
+            <span>Website</span>
+            <span aria-hidden>↗</span>
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="flex size-9 items-center justify-center rounded-[4px] border border-border"
+            aria-label="Open menu"
+          >
+            <List className="size-4" />
+          </button>
+        </div>
       </header>
 
       <AnimatePresence>

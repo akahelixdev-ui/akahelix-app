@@ -13,9 +13,22 @@ export function AuthFrame({ children }: { children: ReactNode }) {
     <div className="grid min-h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
       <div className="flex flex-col px-5 py-6 md:px-10 md:py-8">
         <div className="flex items-center justify-between">
-          <Link to="/auth" aria-label="AKAHELIX">
+          <a
+            href="https://akahelix.com"
+            className="transition-opacity hover:opacity-80"
+            aria-label="AKAHELIX"
+            title="Go to https://akahelix.com"
+          >
             <Wordmark />
-          </Link>
+          </a>
+          <a
+            href="https://akahelix.com"
+            className="label-mono flex items-center gap-1.5 text-[0.8125rem] text-muted-foreground transition-colors hover:text-foreground"
+            title="Go to https://akahelix.com"
+          >
+            <span>Website</span>
+            <span aria-hidden>↗</span>
+          </a>
         </div>
         <div className="flex flex-1 items-center py-16">
           <div className="mx-auto w-full max-w-[24rem]">{children}</div>
