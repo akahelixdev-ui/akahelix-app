@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1794156441816,
+      "tag": "0000_dashboard_core",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794156471816,
+      "tag": "0001_dashboard_samples",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794727420114,
+      "tag": "0002_finance_bookkeeping",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794767084243,
+      "tag": "0003_project_details_profile_avatars",
+      "breakpoints": true
+    }
+  ]
+}
