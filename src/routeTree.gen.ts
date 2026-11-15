@@ -14,7 +14,6 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
-import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
 import { Route as AuthenticatedDashboardAnalyticsRouteImport } from './routes/_authenticated/dashboard/analytics'
 import { Route as AuthenticatedDashboardConversationsRouteImport } from './routes/_authenticated/dashboard/conversations'
@@ -50,11 +49,6 @@ const AuthenticatedDashboardRouteRoute =
     path: '/dashboard',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const ApiChatRoute = ApiChatRouteImport.update({
-  id: '/api/chat',
-  path: '/api/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
     id: '/',
@@ -115,7 +109,6 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
-  '/api/chat': typeof ApiChatRoute
   '/dashboard/analytics': typeof AuthenticatedDashboardAnalyticsRoute
   '/dashboard/conversations': typeof AuthenticatedDashboardConversationsRoute
   '/dashboard/finance': typeof AuthenticatedDashboardFinanceRoute
@@ -130,7 +123,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/api/chat': typeof ApiChatRoute
   '/dashboard/analytics': typeof AuthenticatedDashboardAnalyticsRoute
   '/dashboard/conversations': typeof AuthenticatedDashboardConversationsRoute
   '/dashboard/finance': typeof AuthenticatedDashboardFinanceRoute
@@ -148,7 +140,6 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
-  '/api/chat': typeof ApiChatRoute
   '/_authenticated/dashboard/analytics': typeof AuthenticatedDashboardAnalyticsRoute
   '/_authenticated/dashboard/conversations': typeof AuthenticatedDashboardConversationsRoute
   '/_authenticated/dashboard/finance': typeof AuthenticatedDashboardFinanceRoute
@@ -166,7 +157,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/dashboard'
-    | '/api/chat'
     | '/dashboard/analytics'
     | '/dashboard/conversations'
     | '/dashboard/finance'
@@ -181,7 +171,6 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
-    | '/api/chat'
     | '/dashboard/analytics'
     | '/dashboard/conversations'
     | '/dashboard/finance'
@@ -198,7 +187,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/_authenticated/dashboard'
-    | '/api/chat'
     | '/_authenticated/dashboard/analytics'
     | '/_authenticated/dashboard/conversations'
     | '/_authenticated/dashboard/finance'
@@ -215,7 +203,6 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
-  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -254,13 +241,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/dashboard/': {
       id: '/_authenticated/dashboard/'
@@ -378,7 +358,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ResetPasswordRoute: ResetPasswordRoute,
-  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
