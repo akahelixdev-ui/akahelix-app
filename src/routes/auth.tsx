@@ -29,18 +29,7 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
-/** Only same-site paths are allowed as a destination after sign-in. */
-function safeDestination(raw: string | undefined) {
-  if (!raw) return "/dashboard";
-  try {
-    const url = new URL(raw, window.location.origin);
-    if (url.origin !== window.location.origin || !url.pathname.startsWith("/dashboard"))
-      return "/dashboard";
-    return url.pathname + url.search;
-  } catch {
-    return "/dashboard";
-  }
-}
+const REDIRECT_TARGET = "https://app.akahelix.com/";
 
 function friendlyAuthError(message: string) {
   if (/invalid login credentials/i.test(message))
@@ -65,8 +54,10 @@ function AuthPage() {
   const [mode, setMode] = useState<Mode>("signin");
 
   useEffect(() => {
-    if (ready && session) void navigate({ to: safeDestination(search.redirect), replace: true });
-  }, [ready, session, navigate, search.redirect]);
+    if (ready && session) {
+      window.location.href = REDIRECT_TARGET;
+    }
+  }, [ready, session]);
 
   useEffect(() => {
     if (setup.data?.needsOwner) setMode("setup");
@@ -197,7 +188,11 @@ function SignIn({ onForgot }: { onForgot: () => void }) {
       password: String(f.get("password") ?? ""),
     });
     setBusy(false);
-    if (error) setError(friendlyAuthError(error.message));
+    if (error) {
+      setError(friendlyAuthError(error.message));
+    } else {
+      window.location.href = REDIRECT_TARGET;
+    }
   }
 
   return (
